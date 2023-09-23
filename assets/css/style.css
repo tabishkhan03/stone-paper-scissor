@@ -1,0 +1,115 @@
+*{
+    font-family: 'Roboto', sans-serif;
+}
+
+body{
+    background-color: #74372e5c;
+}
+h1{
+    text-align: center;
+    font-size: 54px;
+    font-weight: 500;
+}
+.player-option button{
+    width: 150px;
+    height: 150px;
+    border: none;
+    border-radius: 20px;
+}
+.player-option button svg{
+    width: 80%;
+    height: 80%;
+    color: #2E4374;
+}
+.opt-sect{
+    border: 1px solid #fff;
+    /* margin: 2px; */
+}
+input{
+    width: 100px;
+    outline: none;
+}
+select{
+    width: 100px;
+    outline: none;
+}
+select:focus{
+    outline: none;
+}
+h3{
+    text-align: center;
+    color: #5CC067;
+    font-weight: 500;
+    font-size: 40px;
+}
+.game{
+    display: flex;
+    align-items: center;
+}
+ul li button{
+    width: 100px;
+    border: none;
+    padding: 10px;
+    height: 100px;
+}
+span{
+    color: rgba(0, 0, 0, 0.667);
+    font-size: 25px;
+    display: inline-block;
+    text-align: center;
+}
+.btns:focus{
+    background-color: #E5C3A6;
+}
+.compselected{
+    background-color: #E5C3A6;
+}
+img{
+    width: 100%;
+}
+input{
+    border: none;
+    background-color: transparent;
+    color: rgba(0, 0, 0, 0.667);
+    font-size: 25px;
+    color: black;
+}
+#play{
+    display: block;
+    width: 100px;
+    background-color: #5CC067;
+}
+.play-div{
+    display: flex;
+    justify-content: center;
+}
+.player-div{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+.container{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+@media screen and (max-width:600px) {
+    h1{
+        font-size: 40px;
+    }
+    h3{
+        font-size: 35px;
+    }
+    span{
+        font-size: 20px;
+    }
+}
+@media screen and (max-width:576px) {
+    .player-option button{
+        width: 100%;
+        height: 100px;
+        border: none;
+        border-radius: 20px;
+    }
+}

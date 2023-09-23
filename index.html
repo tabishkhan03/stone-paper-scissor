@@ -8,143 +8,63 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+<link rel="stylesheet" href="assets/css/style.css">
 </head>
-<style>
-    *{
-        font-family: 'Roboto', sans-serif;
-    }
-   
-    body{
-        background-color: #FFE873;
-    }
-    h1{
-        text-align: center;
-        font-size: 40px;
-        font-weight: 500;
-    }
-    input{
-        width: 100px;
-        outline: none;
-    }
-    select{
-        width: 100px;
-        outline: none;
-    }
-    select:focus{
-        outline: none;
-    }
-    h3{
-        text-align: center;
-        color: #5CC067;
-        font-weight: 500;
-        font-size: 20px;
-    }
-    .game{
-        display: flex;
-        align-items: center;
-    }
-    ul{
-        list-style: none;
-        display: flex;
-        justify-content: center;
-    }
-    li{
-        margin: 30px;
-    }
-    ul li button{
-        width: 100px;
-        border: none;
-        padding: 10px;
-        height: 100px;
-    }
-    span{
-        color: rgba(0, 0, 0, 0.667);
-        font-size: 25px;
-        display: inline-block;
-        text-align: center;
-    }
-    .btns:focus{
-        background-color: pink;
-    }
-    img{
-        width: 100%;
-    }
-    input{
-        border: none;
-        background-color: transparent;
-        color: rgba(0, 0, 0, 0.667);
-        font-size: 25px;
-        color: black;
-    }
-    #play{
-        display: block;
-        width: 100px;
-        background-color: #5CC067;
-    }
-    .play-div{
-        display: flex;
-        justify-content: center;
-    }
-    .player-div{
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-    }
-    .container{
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-    }
-
-    @media screen and (max-width:600px) {
-        h1{
-            font-size: 30px;
-        }
-        h3{
-            font-size: 15px;
-        }
-        span{
-            font-size: 20px;
-        }
-        ul{
-            padding: 0;
-        }
-        li{
-            margin: 10px;
-        }
-        ul li button{
-        width: 75px;
-        border: none;
-        padding: 10px;
-        height: 75px;
-    }
-    }
-</style>
 <body>
     <h1>Stone Paper Scissor Game</h1>
 
     <h3 id="result">Result</h3>
 
     <div class="container ">
-        <span>Your Options:</span>
-        <div class="player-div">
-            <ul name="" id="swg">
-                <li> <button class="stone btns"  value="stone"><img src="stone.jpg" alt=""></button> </li>
-                <li> <button class="paper btns" value="paper"><img src="paper.jpg" alt=""></button> </li>
-                <li> <button class="scissor btns" value="scissor"><img src="scissor.png" alt=""></button></li>
-            </ul>
-            <div class="score">
-                <span>Score:</span><input id="scoreid"><br>
-                <span>You Selected:</span><input id="player-value"><br>
-                <span>Computer Selected:</span><input id="input">
+        <div class="row">
+            <div class="col-lg-6 opt-sect">
+                <span>Your Options:</span>
+                <div class="row">
+                    <div class="col-4 align-items-center justify-content-center player-option">
+                        <button class="stone btns"  value="stone"><i class="fa-solid fa-hand-fist"></i></button> 
+                    </div>
+                    <div class="col-4 align-items-center justify-content-center player-option">
+                        <button class="paper btns" value="paper"><i class="fa-solid fa-hand"></i></button> 
+                    </div>
+                    <div class="col-4 align-items-center justify-content-center player-option">
+                        <button class="scissor btns" value="scissor"><i class="fa-solid fa-hand-scissors"></i></button>
+                    </div>
+                    <div class="col-lg-12 py-lg-5 py-3">
+                        <span>Score:</span><input readonly id="scoreid" value="0"><br>
+                        <span>You Selected:</span><input readonly id="player-value"><br>
+                    </div>
+                </div>
             </div>
+            <div class="col-lg-6 opt-sect">
+                <span>Computer Options:</span>
+                <div class="row">
+                    <div class="col-4 align-items-center justify-content-center player-option">
+                        <button class="stone compbtns compstone"  value="stone"><i class="fa-solid fa-hand-fist"></i></button> 
+                    </div>
+                    <div class="col-4 align-items-center justify-content-center player-option">
+                        <button class="paper compbtns comppaper" value="paper"><i class="fa-solid fa-hand"></i></button> 
+                    </div>
+                    <div class="col-4 align-items-center justify-content-center player-option">
+                        <button class="scissor compbtns compscissor" value="scissor"><i class="fa-solid fa-hand-scissors"></i></button>
+                    </div>
+                    <div class="col-lg-12 py-lg-5 py-3">
+                        <span>Score:</span><input readonly id="compscoreid" value="0"><br>
+                        <span>Computer Selected:</span><input readonly id="input">
+                    </div>
+                </div>
+            </div>
+        </div>
+            <!-- <div class="score">
+                <span>Computer Selected:</span><input readonly id="input">
+            </div> -->
         </div>
 
     </div>
 
     
-
-    <script src="game.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/js/all.min.js" integrity="sha512-uKQ39gEGiyUJl4AI6L+ekBdGKpGw4xJ55+xyJG7YFlJokPNYegn9KwQ3P8A7aFQAUtUsAQHep+d/lrGqrbPIDQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="assets/js/app.js"></script>
 </body>
 </html>
