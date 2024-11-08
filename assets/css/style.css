@@ -20,9 +20,17 @@ h1 {
 
 h3 {
     text-align: center;
-    color: #e57373; /* Red accent for result messages */
+    color: #4caf50; /* Red accent for result messages */
     font-weight: 500;
     font-size: 40px;
+}
+
+.main-content{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    padding: 100px 0px;
 }
 
 /* Game Button and Option Styles */
@@ -142,4 +150,42 @@ span {
         height: 80px;
         max-width: 120px;
     }
+}
+
+
+/* dialog box */
+
+.dialogue-box {
+    display: none; /* Hidden by default */
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #333; /* Dark background */
+    color: #e0e0e0; /* Light text */
+    padding: 20px;
+    border-radius: 10px;
+    text-align: center;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
+    z-index: 1000;
+    width: 300px;
+}
+
+#dialogue-text{
+    font-size: 24px;
+}
+
+.dialogue-box.show {
+    display: block; /* Show when active */
+}
+
+.close-btn {
+    background: transparent;
+    border: none;
+    color: #e0e0e0;
+    font-size: 20px;
+    position: absolute;
+    top: 5px;
+    right: 10px;
+    cursor: pointer;
 }
