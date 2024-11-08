@@ -1,84 +1,67 @@
-let s='stone',w='paper',g='scissor';
+let s = 'stone', w = 'paper', g = 'scissor';
 let buttons = document.querySelectorAll('.btns');
-    buttons.forEach((btn) => {
-    btn.addEventListener('click',function(){
-        document.querySelector('#player-value').setAttribute('value',this.value);
-        window.player= this.value;
-        compFunc();
-    })
-})
 
-let score=0;
-let compscore=0;
-let prevcompselected;
+// Player selection
+buttons.forEach((btn) => {
+    btn.addEventListener('click', function () {
+        document.querySelector('#player-value').setAttribute('value', this.value);
+        window.player = this.value;
+        buttons.forEach(b => b.classList.remove('selected'));  // Reset player button style
+        this.classList.add('selected');  // Highlight selected button
+        compSelection();
+    });
+});
+
+let score = 0;
+let compscore = 0;
+
+// Computer selection with animation
+function compSelection() {
+    let compbtns = document.querySelectorAll('.compbtns');
+    let options = ['stone', 'paper', 'scissor'];
+
+    compbtns.forEach(btn => btn.classList.remove('selected'));  // Reset comp button style
+
+    let blinking = setInterval(() => {
+        compbtns.forEach(btn => btn.classList.toggle('blink'));
+    }, 300);
+
+    setTimeout(() => {
+        clearInterval(blinking);
+        compbtns.forEach(btn => btn.classList.remove('blink'));
+
+        let compChoice = options[Math.floor(Math.random() * options.length)];
+        document.querySelector(`#input`).setAttribute('value', compChoice);
+
+        // Highlight selected computer option
+        document.querySelector(`.comp${compChoice}`).classList.add('selected');
+        // document.querySelector(`.comp${compChoice}`).style.backgroundColor = '#d32f2f';
 
 
-function compFunc(){
-    
-            const player = window.player;
-            let value=['stone', 'paper','scissor']
-            let random = Math.floor(Math.random()*value.length );  
-            let compvalue=value[random]
-            let compbtn = document.querySelectorAll('.compbtns');
-
-            if (compvalue=='stone') {
-                document.querySelector(".comppaper").classList.remove("compselected")
-                document.querySelector(".compscissor").classList.remove("compselected")
-                document.querySelector(".compstone").classList.add("compselected")
-                prevcompselected=compvalue;
-            }
-            if (compvalue=='paper') {
-                document.querySelector(".compscissor").classList.remove("compselected")
-                document.querySelector(".compstone").classList.remove("compselected")
-                document.querySelector(".comppaper").classList.add("compselected")
-                prevcompselected=compvalue;
-            }
-            if (compvalue=='scissor') {
-                document.querySelector(".comppaper").classList.remove("compselected")
-                document.querySelector(".compstone").classList.remove("compselected")
-                document.querySelector(".compscissor").classList.add("compselected")
-                prevcompselected=compvalue;
-            }
-            document.querySelector('#input').setAttribute('value',compvalue);
-            
-            switch (compvalue) {
-                            case "stone":
-                                if (player=='stone') { 
-                                    document.querySelector('#result').innerHTML='Draw!';
-                                } else if (player=='paper') { 
-                                    document.querySelector('#result').innerHTML='You Win!';
-                                    score++
-                                } else if (player=='scissor') { 
-                                    document.querySelector('#result').innerHTML='You Lose!'
-                                    compscore++;
-                                }
-                                break;
-                            case "paper":
-                                if (player=='stone') { 
-                                    document.querySelector('#result').innerHTML='You Lose!'
-                                    compscore++;
-                                } else if (player=='paper') { 
-                                    document.querySelector('#result').innerHTML='Draw!';
-                                } else if (player=='scissor') { 
-                                    document.querySelector('#result').innerHTML='You Win!';
-                                    score++
-                                }
-                                break;
-                            case "scissor":
-                                if (player=='stone') { 
-                                    document.querySelector('#result').innerHTML='You Win!';
-                                    score++
-                                } else if (player=='paper') { 
-                                    document.querySelector('#result').innerHTML='You Lose!'
-                                    compscore++;
-                                } else if (player=='scissor') { 
-                                    document.querySelector('#result').innerHTML='Draw!';
-                                }
-                                break;
-                            default:
-                                break;
-            }
-            document.querySelector('#scoreid').value=score;
-            document.querySelector('#compscoreid').value=compscore;
+        calculateResult(compChoice);
+    }, 3000);
 }
 
+// Result calculation
+function calculateResult(compChoice) {
+    let playerChoice = window.player;
+    let resultText = '';
+
+    if (compChoice === playerChoice) {
+        resultText = 'Draw!';
+    } else if (
+        (compChoice === 'stone' && playerChoice === 'paper') ||
+        (compChoice === 'paper' && playerChoice === 'scissor') ||
+        (compChoice === 'scissor' && playerChoice === 'stone')
+    ) {
+        resultText = 'You Win!';
+        score++;
+    } else {
+        resultText = 'You Lose!';
+        compscore++;
+    }
+
+    document.querySelector('#result').innerText = resultText;
+    document.querySelector('#scoreid').value = score;
+    document.querySelector('#compscoreid').value = compscore;
+}
