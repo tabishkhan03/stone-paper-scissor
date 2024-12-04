@@ -1,11 +1,12 @@
 // Wait for SDK to be available
 (function initializeAppwrite() {
-    // Check if SDK is loaded
+    // console.log("Checking for Appwrite SDK...");
     if (typeof window.Appwrite === 'undefined') {
-        // If not loaded, try again in 100ms
+        console.log("Appwrite SDK not yet loaded");
         setTimeout(initializeAppwrite, 100);
         return;
     }
+    console.log("Appwrite SDK loaded successfully");
 
     // Initialize Appwrite
     const client = new window.Appwrite.Client();
@@ -17,7 +18,7 @@
     const database = new window.Appwrite.Databases(client);
     const ID = window.Appwrite.ID; // Get the ID utility
 
-    const DATABASE_ID = '672b397b002f0f0f14a9';
+    const DATABASE_ID = '672b397b002f0f0714a9';
     const COLLECTION_ID = '672e74db0034451e4099';
 
     // Signup
@@ -63,9 +64,11 @@
             e.preventDefault();
             const email = document.querySelector('#email').value;
             const password = document.querySelector('#password').value;
+            console.log("email : is ",email)
+            console.log("email : is ",password)
 
             try {
-                await account.createEmailSession(email, password);
+                await account.createSession(email, password);
                 alert('Login successful!');
                 window.location.href = 'profile.html';
             } catch (err) {
