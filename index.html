@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <script src="https://cdn.jsdelivr.net/npm/appwrite@14.0.1/dist/web.bundle.js"></script>
   <meta charset="UTF-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -14,117 +15,115 @@
     <div class="container-fluid">
       <a class="navbar-brand" href="#">Stone Paper Scissors</a>
       <button
-      class="navbar-toggler"
-      type="button"
-      data-bs-toggle="collapse"
-      data-bs-target="#navbarNav"
-      aria-controls="navbarNav"
-      aria-expanded="false"
-      aria-label="Toggle navigation"
+        class="navbar-toggler"
+        type="button"
+        data-bs-toggle="collapse"
+        data-bs-target="#navbarNav"
+        aria-controls="navbarNav"
+        aria-expanded="false"
+        aria-label="Toggle navigation"
       >
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarNav">
-      <ul class="navbar-nav ms-auto" id="navbar-links">
-        <!-- Links will be dynamically added here -->
-      </ul>
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto" id="navbar-links">
+          <!-- Links will be dynamically added here -->
+        </ul>
+      </div>
     </div>
-  </div>
-</nav>
+  </nav>
 
-<main class="main-content">
-  <div class="container">
-    <div id="result-dialogue" class="dialogue-box">
-      <h3>Result</h3>
-      <span id="dialogue-text"></span>
-      <button id="close-dialogue" class="close-btn">&times;</button>
-    </div>
-    <h1>Stone Paper Scissor Game</h1>
-    <div class="row">
-      <div class="col-lg-6 opt-sect">
-        <span>Your Options:</span>
-        <div class="row">
-          <div
-          class="col-4 align-items-center justify-content-center player-option"
-          >
-          <button class="stone btns" value="stone">
-            <i class="fa-solid fa-hand-fist"></i>
-          </button>
+    <main class="main-content">
+        <div class="container">
+          <div id="result-dialogue" class="dialogue-box">
+            <h3>Result</h3>
+            <span id="dialogue-text"></span>
+            <button id="close-dialogue" class="close-btn">&times;</button>
+          </div>
+          <h1>Stone Paper Scissor Game</h1>
+          <div class="row">
+            <div class="col-lg-6 opt-sect">
+              <span>Your Options:</span>
+              <div class="row">
+                <div
+                  class="col-4 align-items-center justify-content-center player-option"
+                >
+                  <button class="stone btns" value="stone">
+                    <i class="fa-solid fa-hand-fist"></i>
+                  </button>
+                </div>
+                <div
+                  class="col-4 align-items-center justify-content-center player-option"
+                >
+                  <button class="paper btns" value="paper">
+                    <i class="fa-solid fa-hand"></i>
+                  </button>
+                </div>
+                <div
+                  class="col-4 align-items-center justify-content-center player-option"
+                >
+                  <button class="scissor btns" value="scissor">
+                    <i class="fa-solid fa-hand-scissors"></i>
+                  </button>
+                </div>
+                <div class="col-lg-12 py-lg-5 py-3">
+                  <span>Score:</span><input readonly id="scoreid" value="0" /><br />
+                  <span>You Selected:</span
+                  ><input readonly id="player-value" /><br />
+                </div>
+              </div>
+            </div>
+            <div class="col-lg-6 opt-sect">
+              <span>Computer Options:</span>
+              <div class="row">
+                <div
+                  class="col-4 align-items-center justify-content-center player-option"
+                >
+                  <button class="stone compbtns compstone" value="stone">
+                    <i class="fa-solid fa-hand-fist"></i>
+                  </button>
+                </div>
+                <div
+                  class="col-4 align-items-center justify-content-center player-option"
+                >
+                  <button class="paper compbtns comppaper" value="paper">
+                    <i class="fa-solid fa-hand"></i>
+                  </button>
+                </div>
+                <div
+                  class="col-4 align-items-center justify-content-center player-option"
+                >
+                  <button class="scissor compbtns compscissor" value="scissor">
+                    <i class="fa-solid fa-hand-scissors"></i>
+                  </button>
+                </div>
+                <div class="col-lg-12 py-lg-5 py-3">
+                  <span>Score:</span
+                  ><input readonly id="compscoreid" value="0" /><br />
+                  <span>Computer Selected:</span><input readonly id="input" />
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- <div class="score">
+                        <span>Computer Selected:</span><input readonly id="input">
+                    </div> -->
         </div>
-        <div
-        class="col-4 align-items-center justify-content-center player-option"
-        >
-        <button class="paper btns" value="paper">
-          <i class="fa-solid fa-hand"></i>
-        </button>
-      </div>
-      <div
-      class="col-4 align-items-center justify-content-center player-option"
-      >
-      <button class="scissor btns" value="scissor">
-        <i class="fa-solid fa-hand-scissors"></i>
-      </button>
-    </div>
-    <div class="col-lg-12 py-lg-5 py-3">
-      <span>Score:</span><input readonly id="scoreid" value="0" /><br />
-      <span>You Selected:</span
-        ><input readonly id="player-value" /><br />
-      </div>
-    </div>
-  </div>
-  <div class="col-lg-6 opt-sect">
-    <span>Computer Options:</span>
-    <div class="row">
-      <div
-      class="col-4 align-items-center justify-content-center player-option"
-      >
-      <button class="stone compbtns compstone" value="stone">
-        <i class="fa-solid fa-hand-fist"></i>
-      </button>
-    </div>
-    <div
-    class="col-4 align-items-center justify-content-center player-option"
-    >
-    <button class="paper compbtns comppaper" value="paper">
-      <i class="fa-solid fa-hand"></i>
-    </button>
-  </div>
-  <div
-  class="col-4 align-items-center justify-content-center player-option"
-  >
-  <button class="scissor compbtns compscissor" value="scissor">
-    <i class="fa-solid fa-hand-scissors"></i>
-  </button>
-</div>
-<div class="col-lg-12 py-lg-5 py-3">
-  <span>Score:</span
-    ><input readonly id="compscoreid" value="0" /><br />
-    <span>Computer Selected:</span><input readonly id="input" />
-  </div>
-</div>
-</div>
-</div>
-<!-- <div class="score">
-  <span>Computer Selected:</span><input readonly id="input">
-</div> -->
-</div>
-</main>
+    </main>
 
-<footer class="bg-dark text-light text-center py-3 mt-4 fixed-bottom">
-  <div class="container">
-    <p class="mb-0">&copy; 2024 Stone Paper Scissors Game. All rights reserved.</p>
-  </div>
-</footer>
+    <footer class="bg-dark text-light text-center py-3 mt-4 fixed-bottom">
+    <div class="container">
+      <p class="mb-0">&copy; 2024 Stone Paper Scissors Game. All rights reserved.</p>
+    </div>
+  </footer>
 
 <!-- Use the ESM version of the SDK -->
-<!-- <script src="https://cdn.jsdelivr.net/npm/appwrite@14.0.1/dist/web.bundle.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/appwrite@14.0.1/dist/web.bundle.js"></script> -->
-<script src="https://cdn.jsdelivr.net/npm/appwrite@16.0.2"></script>
+<script src="https://cdn.jsdelivr.net/npm/appwrite@14.0.1"></script>
+<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.1/js/all.min.js" integrity="sha512-1JkMy1LR9bTo3psH+H4SV5bO2dFylgOy+UJhMus1zF4VEFuZVu5lsi4I6iIndE4N9p01z1554ZDcvMSjMaqCBQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script> -->
 
-<!-- Add type="module" to your script tags -->
-<script type="module" src="assets/js/app.js"></script>
-<script type="module" src="assets/js/auth.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.1/js/all.min.js" integrity="sha512-1JkMy1LR9bTo3psH+H4SV5bO2dFylgOy+UJhMus1zF4VEFuZVu5lsi4I6iIndE4N9p01z1554ZDcvMSjMaqCBQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+<script  src="assets/js/auth.js"></script>
+<script  src="assets/js/app.js"></script>
   
 </body>
 </html>

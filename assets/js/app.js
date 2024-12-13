@@ -1,11 +1,11 @@
-// Initialize Appwrite SDK
-const client = new Appwrite.Client();
-const account = new Appwrite.Account(client);
-const database = new Appwrite.Databases(client);
+// // Initialize Appwrite SDK
+// const client = new Appwrite.Client();
+// const account = new Appwrite.Account(client);
+// const database = new Appwrite.Databases(client);
 
-client
-  .setEndpoint('hhttps://cloud.appwrite.io/v1') // Replace with your Appwrite endpoint
-  .setProject('672b387e000186463e03');    // Replace with your Appwrite project ID
+// client
+//   .setEndpoint('hhttps://cloud.appwrite.io/v1') // Replace with your Appwrite endpoint
+//   .setProject('672b387e000186463e03');    // Replace with your Appwrite project ID
 
 // Navbar Update Based on Authentication State
 const updateNavbar = async () => {
@@ -14,6 +14,9 @@ const updateNavbar = async () => {
   try {
     const user = await account.get(); // Fetch logged-in user details
     navbarLinks.innerHTML = `
+      <li class="nav-item">
+        <p id="highScore" class="nav-link">Highscore: ${JSON.parse(localStorage.getItem("userData")).highScore}</p>
+      </li>
       <li class="nav-item">
         <a class="nav-link" href="/profile.html">Profile</a>
       </li>
@@ -24,7 +27,8 @@ const updateNavbar = async () => {
 
     document.getElementById('logout-btn').addEventListener('click', async () => {
       await account.deleteSession('current'); // Logout the user
-      location.reload(); // Refresh to update navbar
+      localStorage.removeItem("userData")
+      window.location.href="/login.html"; // Refresh to update navbar
     });
   } catch {
     navbarLinks.innerHTML = `
@@ -39,15 +43,20 @@ const updateNavbar = async () => {
 };
 
 // Save High Score to Leaderboard
-const saveHighScore = async (playerName, highScore) => {
+const saveHighScore = async (highScore) => {
   try {
-    await database.createDocument(
-      '672b397b002f0f0714a9',    // Replace with your database ID
-      '672e74db0034451e4099',  // Replace with your collection ID
-      Appwrite.ID.unique(),
-      { playerName, highScore }
-    );
-    console.log('Score saved successfully!');
+    // await database.createDocument(
+    //   '672b397b002f0f0714a9',    // Replace with your database ID
+    //   '672e74db0034451e4099',  // Replace with your collection ID
+    //   Appwrite.ID.unique(),
+    //   { playerName, highScore }
+    // );
+    const userData=JSON.parse(localStorage.getItem("userData"))
+    if(userData.highScore<highScore){
+      userData.highScore=highScore
+    }
+    localStorage.setItem("userData",JSON.stringify(userData))
+    document.getElementById("highScore").innerHTML=userData.highScore
   } catch (error) {
     console.error('Error saving score:', error);
   }
@@ -126,6 +135,7 @@ function showResultDialogue(resultText) {
     dialogueText.innerText = resultText;
     if (resultText === 'You Win!') {
         dialogueText.style.color = '#4caf50'; // Green for "You Win!"
+        saveHighScore(score)
     } else if (resultText === 'You Lose!') {
         dialogueText.style.color = '#d32f2f'; // Red for "You Lose!"
     } else if (resultText === 'Draw!') {
